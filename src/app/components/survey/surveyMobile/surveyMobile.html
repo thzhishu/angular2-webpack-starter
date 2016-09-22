@@ -262,7 +262,7 @@
                     <div class="sv-q-radio">
                         <div class="sv-q-t" [class.warning]="surveyQustions[11]?.hasErr  && surveyQustions[11]?.answer === ''">Q12 {{surveyQustions[11]?.title}}</div>
                         <div class="sv-q-errtip warning" *ngIf="surveyQustions[11]?.hasErr && surveyQustions[11]?.answer === ''">{{surveyQustions[11].errMsg}}</div>
-                        <div class="sv-q-c">
+                        <div class="sv-q-c sv-q-c12">
                             <label *ngFor="let ans of surveyQustions[11]?.options" [class.checked]="surveyQustions[11]?.answer === ans.id">
                                 <input type="radio" (change)="surveyQustions[11].answer = ans.id" [checked]="surveyQustions[11]?.answer === ans.id">
                                 {{ans.title}} 

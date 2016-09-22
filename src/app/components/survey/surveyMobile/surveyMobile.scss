@@ -393,6 +393,15 @@
     .sv-q-c {
         font-size:0;
     }
+
+    .sv-q-c12 {
+        > label {
+            &:last-child {
+                font-size:24px;
+            }
+        }
+    }
+
     label {
         display:inline-block;
         position:relative;
@@ -402,7 +411,7 @@
         padding-left:62px;
         height:38px;
         line-height: 38px;
-        margin-bottom:71px;
+        margin-bottom:40px;
         counter-increment: testname2;
         input {
             display:none;
