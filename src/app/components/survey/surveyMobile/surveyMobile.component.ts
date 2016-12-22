@@ -278,9 +278,16 @@ export class SurveyMobileComponent {
         }, 800);
     }
 
+    gotoAll(){
+        for(let val of [2,3,4,5,6,7,8,100]){
+            if(!this.gotoNext(val)){
+                break;
+            }
+        }
+    }
+
     gotoNext(page) {
         let valid = true;
-        if (page !== 100) {
             switch (page) {
                 case 2:
                 case 3:
@@ -304,25 +311,64 @@ export class SurveyMobileComponent {
                     // 验证第十一题
                     valid = this.questionGroupValid([10], 7);
                     break;
+                case 100:
+                    valid = this.questionGroupValid([11], 8);
+                    if (valid) {
+                        this.onSave();
+                    }
+                    break;
                 default:
                     console.log(page);
             }
-            if (valid) {
-                this.goto(page);
-            }
-        } else {
-            // 验证第十二题
-            valid = this.questionGroupValid([11], 8);
-            if (valid) {
-                this.onSave();
-            }
-        }
-            
+            return valid;
     }
+
+    // gotoNext(page) {
+    //     let valid = true;
+    //     if (page !== 100) {
+    //         switch (page) {
+    //             case 2:
+    //             case 3:
+    //             case 4:
+    //                 // 验证第一题 验证第二题 验证第三题
+    //                 valid = this.scoreMultiValid(this.surveyQustions[page - 2], page - 2, page);
+    //                 break;
+    //             case 5:
+    //                 // 验证第四题
+    //                 valid = this.questionGroupValid([3], 4);
+    //                 break;
+    //             case 6:
+    //                 // 验证第五题 验证第六题 验证第七题
+    //                 valid = this.questionGroupValid([4, 5, 6], 5);
+    //                 break;
+    //             case 7:
+    //                 // 验证第八题 验证第九题 验证第十题
+    //                 valid = this.questionGroupValid([7, 8, 9], 6);
+    //                 break;
+    //             case 8:
+    //                 // 验证第十一题
+    //                 valid = this.questionGroupValid([10], 7);
+    //                 break;
+    //             default:
+    //                 console.log(page);
+    //         }
+    //         if (valid) {
+    //             this.goto(page);
+    //         }
+    //     } else {
+    //         // 验证第十二题
+    //         valid = this.questionGroupValid([11], 8);
+    //         if (valid) {
+    //             this.onSave();
+    //         }
+    //     }
+            
+    // }
 
     // 多项评分题验证
     scoreMultiValid(q, idx, page) {
         let tempArr = [];
+        let position = jQuery('#thzs-q-' + (idx+1)).offset();
         for (let i = 0, len = q.answer.length; i < len; i++) {
             if ( q.answer[i] === undefined ) {
                 // 第 i 个子题没选
@@ -330,7 +376,7 @@ export class SurveyMobileComponent {
                 // alert(`第${idx + 1}题的"${q.children[i].title}"还未评价`);
                 q.hasErr = true;
                 q.errMsg = '该问题没有回答完整，请继续作答';
-                this.mScroll('p-thzs-q-' + (page - 1) );
+                this.mScroll('p-thzs-q-'+page, position.top );
                 return false;
             } else {
                 tempArr.push(q.answer[i]);
@@ -341,9 +387,9 @@ export class SurveyMobileComponent {
     }
     // 常规问题验证
     questionValid (q, idx, page) {
+        let position = jQuery('#thzs-q-' + (idx+1)).offset();
         if ( q.type === 'stext' && !this.stextBlur(q, idx) ) {
-            let position = jQuery('#thzs-q-' + (idx + 1)).position();
-            this.mScroll('p-thzs-q-' + page, position.top );
+             this.mScroll('p-thzs-q-'+page, position.top );
             return false;
         }
         if (q.answer === '') {
@@ -351,7 +397,8 @@ export class SurveyMobileComponent {
             // alert(`第${idx + 1}题还未回答`);
             q.hasErr = true;
             q.errMsg = '请您回答该题';
-            this.mScroll('p-thzs-q-' + page, 0 );
+            
+             this.mScroll('p-thzs-q-'+page, position.top );
             return false;
         }
         this.tempPageAnswers.push({
@@ -377,9 +424,12 @@ export class SurveyMobileComponent {
 
     //滚动到指定位置
     mScroll(id, top = 0) {
-        jQuery('#' + id).animate({
-            scrollTop: top
-        }, 1000);
+            jQuery('body').animate({
+                    scrollTop: top
+                }, 1000);
+        // jQuery('#' + id).animate({
+        //             scrollTop: top
+        //         }, 1000);
     }
     
     stextBlur(q, i) {

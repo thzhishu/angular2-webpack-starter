@@ -1,7 +1,7 @@
 <div class="sv sv-f">
     <div class="sv-container sv-f" *ngIf="showSurvey">
         <!-- 首屏 -->
-        <div class="sv-page  sp-0" [class.current] = "currentPage === 0" [class.old]="waitingPage === 0">
+        <div class="sv-page  sp-0 sv-first" [class.current] = "currentPage === 0" [class.old]="waitingPage === 0">
             <div class="box box-v box-v-cc">
                 <div class="sv-logo"></div>
                 <div class="sv-h">
@@ -15,7 +15,7 @@
             </div>
         </div>
         <!-- 首屏 end -->
-        <div id="p-thzs-q-1" class="sv-page sp-1" [class.current] = "currentPage===1" [class.old]="waitingPage === 1">
+        <div id="p-thzs-q-1" class="sv-page  sp-1" [class.current] = "currentPage>0&&currentPage<100" [class.old]="waitingPage>0&&waitingPage < 100">
             <div class="svp-wrap" >
                 <div class="sv-q" id="thzs-q-1">
                     <!-- 多项评分题 -->
@@ -26,7 +26,7 @@
                         </div>
                         <div class="sv-q-errtip warning" *ngIf="surveyQustions[0]?.hasErr">{{surveyQustions[0].errMsg}}</div>
                         <div class="sv-q-c">
-                            
+
 
                             <div class="sv-q-score" *ngFor="let subq of surveyQustions[0]?.children; let j = index;">
                                 <div class="sv-q-t" [class.warning]="subq.hasErr">{{ subq.title }}</div>
@@ -40,14 +40,9 @@
 
                         </div>
                     </div>
-                    <!-- 多项评分题 end --> 
+                    <!-- 多项评分题 end -->
                 </div>
-                <div class="sp-btn" (click)="gotoNext(2)">下一步</div>
             </div>
-            
-
-        </div>
-        <div id="p-thzs-q-2" class="sv-page sp-2" [class.current] = "currentPage===2" [class.old]="waitingPage === 2">
             <div class="svp-wrap">
                 <div class="sv-q" id="thzs-q-2">
                     <!-- 多项评分题 -->
@@ -67,17 +62,14 @@
                                 </div>
                             </div>
 
-                            
+
 
                         </div>
                     </div>
-                    <!-- 多项评分题 end --> 
+                    <!-- 多项评分题 end -->
                 </div>
-                <div class="sp-btn" (click)="gotoNext(3)">下一步</div>
             </div>
-        </div>
-        <div id="p-thzs-q-3" class="sv-page sp-3" [class.current] = "currentPage===3" [class.old]="waitingPage === 3">
-            <div class="svp-wrap">
+        <div class="svp-wrap">
                 <div class="sv-q" id="thzs-q-3">
                     <!-- 多项评分题 -->
                     <div class="sv-q-mscore">
@@ -95,16 +87,13 @@
                                 </div>
                             </div>
 
-                            
+
 
                         </div>
                     </div>
-                    <!-- 多项评分题 end --> 
+                    <!-- 多项评分题 end -->
                 </div>
-                <div class="sp-btn" (click)="gotoNext(4)">下一步</div>
             </div>
-        </div>
-        <div id="p-thzs-q-4" class="sv-page sp-4" [class.current] = "currentPage===4" [class.old]="waitingPage === 4">
             <div class="svp-wrap">
                 <div class="sv-q" id="thzs-q-4">
                     <!-- 多项评分题 -->
@@ -126,13 +115,10 @@
 
                         </div>
                     </div>
-                    <!-- 多项评分题 end --> 
+                    <!-- 多项评分题 end -->
                 </div>
-                <div class="sp-btn" (click)="gotoNext(5)">下一步</div>
             </div>
-        </div>
-        <div id="p-thzs-q-5" class="sv-page sp-5" [class.current] = "currentPage===5" [class.old]="waitingPage === 5">
-            <div class="box box-v box-v-c svp-wrap">
+                        <div class="box box-v box-v-c svp-wrap">
                 <div class="sv-q" id="thzs-q-5">
                     <!-- 性别题 -->
                     <div class="sv-q-sex">
@@ -145,11 +131,11 @@
                                 <div class="q-person">{{ j == 0 ? '男' : '女' }}</div>
                                 <div class="q-checked"></div>
                             </label>
-                            
+
 
                         </div>
                     </div>
-                    <!-- 性别题 end --> 
+                    <!-- 性别题 end -->
                 </div>
                 <div class="sv-q" id="thzs-q-6">
                     <!-- 年龄题 -->
@@ -164,7 +150,7 @@
 
                         </div>
                     </div>
-                    <!-- 年龄题 end --> 
+                    <!-- 年龄题 end -->
                 </div>
                 <div class="sv-q" id="thzs-q-7">
                     <!-- 单行文本题 -->
@@ -180,11 +166,8 @@
                     </div>
                     <!-- 单行文本题 end -->
                 </div>
-                <div class="sp-btn" (click)="gotoNext(6)">下一步</div>
             </div>
-        </div>
-        <div id="p-thzs-q-6" class="sv-page sp-6" [class.current] = "currentPage===6" [class.old]="waitingPage === 6">
-            <div class="box box-v box-v-c svp-wrap">
+                        <div class="box box-v box-v-c svp-wrap">
                 <div class="sv-q" id="thzs-q-8">
                     <!-- 单行文本题 -->
                     <div class="sv-q-stext">
@@ -228,10 +211,7 @@
                     <!-- 单行文本题 end -->
                 </div>
 
-                <div class="sp-btn" (click)="gotoNext(7)">下一步</div>
             </div>
-        </div>
-        <div id="p-thzs-q-7" class="sv-page sp-7" [class.current] = "currentPage===7" [class.old]="waitingPage === 7">
             <div class="box box-v box-v-c svp-wrap">
                 <div class="sv-q" id="thzs-q-11">
                     <!-- 单选题 -->
@@ -243,20 +223,17 @@
                                 <input type="radio" (change)="surveyQustions[10].answer = ans.id" [checked]="surveyQustions[10]?.answer === ans.id">
                                 {{ans.title}}
                             </label>
-                            
-                            
+
+
 
                         </div>
                     </div>
                     <!-- 单选题 end -->
                 </div>
-                
 
-                <div class="sp-btn" (click)="gotoNext(8)">下一步</div>
+
             </div>
-        </div>
-        <div id="p-thzs-q-8" class="sv-page sp-8" [class.current] = "currentPage===8" [class.old]="waitingPage === 8">
-            <div class="box box-v box-v-c svp-wrap">
+                        <div class="box box-v box-v-c svp-wrap bottom-img">
                 <div class="sv-q" id="thzs-q-12">
                     <!-- 单选题 -->
                     <div class="sv-q-radio">
@@ -265,18 +242,18 @@
                         <div class="sv-q-c sv-q-c12">
                             <label *ngFor="let ans of surveyQustions[11]?.options" [class.checked]="surveyQustions[11]?.answer === ans.id">
                                 <input type="radio" (change)="surveyQustions[11].answer = ans.id" [checked]="surveyQustions[11]?.answer === ans.id">
-                                {{ans.title}} 
+                                {{ans.title}}
                             </label>
                         </div>
                     </div>
                     <!-- 单选题 end -->
                 </div>
-                
 
-                <div class="sp-btn" (click)="gotoNext(100)">下一步</div>
+
+                <div class="sp-btn" (click)="gotoAll()">提交</div>
             </div>
         </div>
-        <div class="sv-page sp-100" [class.current] = "currentPage===100" [class.old]="waitingPage === 100">
+        <div class="sv-page sp-100 sv-end" [class.current] = "currentPage===100" [class.old]="waitingPage === 100">
             <div class="box box-v box-v-c sp-end">
                 <div class="flex-1 box box-v box-v-cc sv-complete" *ngIf="showSurvey === 2">
                     <div>
@@ -292,6 +269,4 @@
             </div>
         </div>
     </div>
-    
-    
 </div>
