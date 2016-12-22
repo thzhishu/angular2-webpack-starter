@@ -503,3 +503,16 @@ a {
 .foot .safe > div:last-child:hover {
 	background-position:-256px -3px;
 }
+
+.guide-top{
+	position: relative;
+}
+
+.guide-close{
+	width: 25px;
+	height: 25px;
+	display: block;
+	position: absolute;
+	top:0;
+	right: 23.5%;
+}

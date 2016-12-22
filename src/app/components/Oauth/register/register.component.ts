@@ -188,6 +188,9 @@ export class RegisterComponent {
     this.errorMsg = null;
     this.loading = 1;
     let params = this.user;
+
+    this.uApi.defaultHeaders.set('registerChannel', '2'); // 注册渠道 PC = 1 or H5 = 2  
+
     //mobile: string, password: string, code: string, captcha: string
     this.uApi.userRegisterPost(params.phone, Md5.hashStr(params.pwd, false).toString(), params.code, params.rnd)
       .subscribe((data) => {
